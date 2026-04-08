@@ -79,7 +79,7 @@ class DmImuNode(Node):
             qos = qos_profile_sensor_data
 
         # ---------- Publishers ----------
-        self.pub_imu  = self.create_publisher(Imu, 'imu/data', qos)                 if self.publish_imu_data else None
+        self.pub_imu  = self.create_publisher(Imu, 'imu', qos)                     if self.publish_imu_data else None
         self.pub_rpy  = self.create_publisher(Vector3Stamped, 'imu/rpy', qos)       if self.publish_rpy      else None
         self.pub_pose = self.create_publisher(PoseStamped, 'pose', 10)               if self.publish_pose     else None
 
