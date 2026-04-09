@@ -87,6 +87,8 @@ class DmImuNode(Node):
         try:
             # 按你的要求：初始化不传 timeout
             self.ser = DM_Serial(self.port, baudrate=self.baudrate)
+            if not self.ser.opened:
+                raise RuntimeError(f'Failed to open serial {self.port} @ {self.baudrate} Err {self.ser.last_error()}')
             self.ser.start_reader()  # 后台读线程交给你的类
             self.get_logger().info(f'Opened serial {self.port} @ {self.baudrate}')
         except Exception as e:

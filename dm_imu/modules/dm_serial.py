@@ -38,6 +38,7 @@ class DM_Serial:
         self.timeout = 0.0  # 非阻塞
         self.ser: Optional[serial.Serial] = None
         self._buf = bytearray()
+        self.opened = False
 
         # 统计
         self.cnt_ok = 0
@@ -58,7 +59,7 @@ class DM_Serial:
         self._latest_by_rid: Dict[int, Tuple[float, float, float]] = {}
         self._last_error: Optional[str] = None
 
-        self._open()
+        self.opened = self._open()
 
     # ------------ 公共 API ------------
     def read(self, max_bytes: int | None = None) -> Optional[Tuple[int, Tuple[float, float, float]]]:
